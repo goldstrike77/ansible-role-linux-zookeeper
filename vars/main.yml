@@ -1,2 +1,8 @@
 ---
-# vars file for ansible-role-linux-zookeeper
+zoo_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn'
+
+zoo_service_privilege:
+  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl restart zookeeper.service'
+  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl stop zookeeper.service'
+  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl start zookeeper.service'
+  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl status zookeeper.service'

@@ -1,0 +1,5 @@
+---
+zoo_dependent_packages:
+  - 'java-1.8.0-openjdk-headless'
+  - 'libselinux-utils'
+  - 'policycoreutils-python'

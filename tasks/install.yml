@@ -1,0 +1,24 @@
+---
+- name: Add the group zookeeper.
+  group:
+    name: '{{ zoo_arg.user }}'
+
+- name: Add the user zookeeper.
+  user:
+    name: '{{ zoo_arg.user }}'
+    comment: '{{ zoo_arg.user }}'
+    group: '{{ zoo_arg.user }}'
+    home: '{{ zoo_path }}/zookeeper'
+
+- name: Install Apache Zookeeper {{ zoo_version }} Core.
+  unarchive:
+    src: '{{ zoo_soft_url }}/apache/zookeeper/zookeeper-{{ zoo_version }}/apache-zookeeper-{{ zoo_version }}-bin.tar.gz'
+    dest: '{{ zoo_path }}/zookeeper'
+    owner: '{{ zoo_arg.user }}'
+    group: '{{ zoo_arg.user }}'
+    remote_src: 'yes'
+    validate_certs: 'no'
+  register: zoo_update
+  until: zoo_update is succeeded
+  retries: 3
+  delay: 5
