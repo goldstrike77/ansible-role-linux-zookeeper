@@ -34,7 +34,7 @@ This role will work on the following operating systems:
 
   * CentOS 7
 
-### Zaookeeper versions
+### Zookeeper versions
 
 The following list of supported the zookeeper releases:
 
