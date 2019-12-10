@@ -3,6 +3,13 @@
 zoo_is_install: false # A boolean value, whether install the Apache Zookeeper.
 zoo_version: '3.5.6' # Specify the Zookeeper version.
 zoo_path: '/data' # Specify the Zookeeper working directory.
+zoo_java_home: '/usr/lib/jvm/java' # Environment variable to point to an installed JDK.
+
+# JVM memory Variables #
+zoo_jvm_metaspace: '{% if ansible_memtotal_mb > 4096 and ansible_memtotal_mb <= 8192 %}512{% elif ansible_memtotal_mb > 8192 %}1024{% else %}256{% endif %}' # Size of the metaspace in MB.
+zoo_jvm_xmn: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6 * 0.2)|int }}' # Size of the heap for the young generation in MB.
+zoo_jvm_xmx: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6)|int }}' # Size of the heap in MB.
+zoo_jvm_xss: '256' # Size of thread stack in KB.
 
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
@@ -19,11 +26,41 @@ consul_public_http_port: '8500' # The consul HTTP API port.
 consul_public_clients: # List of public consul clients.
   - '127.0.0.1'
 
+# Syslog parameters #
+syslog: false # A boolean value,  Enable or Disable send console and access log to remote Syslog server.
+syslog_port: '12201' # Syslog server port.
+syslog_protocol: 'udp' # Syslog server protocol.
+syslog_server: # List of syslog server list.
+  - '127.0.0.1'
+
 # Listen port #
 zoo_port:
   client: '2181' # Client Port.
+  admin: '18080' # The port the embedded Jetty server listens on.
+  wrapper: '33000-33999' # A socket to communicate with its Java component running inside a JVM.
+  wrapper_jvm: '34000-34999' # A socket to communicate with its Java component running inside a JVM.
+  jmx: '9405' # Prometheus jmx_exporter listens.
 
 # System Variables #
 zoo_arg:
   connections: '1000' # The maximum number of client connections.
   user: 'zookeeper' # Zookeeper running user.
+  admin_enableServer: true # Whether enable the Admin Server.
+  admin_commandURL: '/commands' # The URL for listing and issuing commands relative to the root URL.
+  jvm_heapdumppath: '/tmp' # Heap dump folder.
+  jvm_security_egd: '/dev/urandom' # Random number generation library.
+  lc_ctype: 'zh_CN.UTF-8' # The language of messages.
+  timezone: 'Asia/Shanghai' # Default timezone for a single instance of a running JVM.
+  ulimit_core: 'unlimited' # The number of core dump launched by systemd.
+  ulimit_nofile: '10240' # The number of files launched by systemd.
+  ulimit_nproc: '10240' # The number of processes launched by systemd.
+  wrapper_console_format: 'PM' # Format to use for output to the console.
+  wrapper_console_loglevel: 'INFO' # Log level to use for console output.
+  wrapper_java_command_loglevel: 'NONE' # Log level to use for Java command.
+  wrapper_logfile: 'zookeeper.out' # Sets the path to the Wrapper log file.
+  wrapper_logfile_format: 'ZM' # Format to use for logging to the log file.
+  wrapper_logfile_loglevel: 'INFO' # Filters messages sent to the log file according to their log levels.
+  wrapper_logfile_maxfiles: '25' # Controls the maximum number of rolled files.
+  wrapper_logfile_maxsize: '50m' # Controls the maximum size of rolled files.
+  wrapper_syslog_loglevel: 'NONE' # Log level to use for logging to the Event Log on syslog on UNIX systems.
+  wrapper_ulimit_loglevel: 'STATUS' # Controls at which log level resource limits will be logged.

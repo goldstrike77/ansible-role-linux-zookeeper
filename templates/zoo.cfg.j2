@@ -26,3 +26,6 @@ maxClientCnxns={{ zoo_arg.connections }}
 # Purge task interval in hours
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
+admin.enableServer={{ zoo_arg.admin_enableServer | bool | to_json }}
+admin.serverPort={{ zoo_port.admin }}
+admin.commandURL={{ zoo_arg.admin_commandURL }}

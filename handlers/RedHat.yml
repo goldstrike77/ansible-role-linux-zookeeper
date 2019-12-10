@@ -8,12 +8,3 @@
   async: 1
   poll: 0
   listen: Ensure zookeeper service is enabled
-
-- name: Allow run service as non-root user on privileged via Systemd 
-  lineinfile:
-    dest: '/etc/sudoers'
-    state: 'present'
-    line: '{{ item }}'
-  loop:
-    - '{{ zoo_service_privilege }}'
-  listen: Ensure zookeeper service is enabled

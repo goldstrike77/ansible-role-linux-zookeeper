@@ -1,23 +1,28 @@
 ---
-- name: Creating Zookeeper snapshot data folder
+- name: Creating Zookeeper working folder.
   file:
-    dest: '{{ zoo_path }}/zookeeper/var'
+    dest: '{{ zoo_path }}/zookeeper/{{ item }}'
     state: 'directory'
     owner: '{{ zoo_arg.user }}'
     group: '{{ zoo_arg.user }}'
     mode: '0755'
+  loop:
+    - 'var'
+    - 'logs'
+    - 'temp'
 
-- name: Zookeeper configuration file transfer.
+- name: Zookeeper configuration file transfer
   template:
-    src: 'zoo.cfg.j2'
-    dest: '{{ zoo_path }}/zookeeper/conf/zoo.cfg'
+    src: '{{ item }}.j2'
+    dest: '{{ zoo_path }}/zookeeper/conf/{{ item }}'
     backup: 'yes'
     owner: '{{ zoo_arg.user }}'
     group: '{{ zoo_arg.user }}'
     mode: '0644'
+  loop: '{{ zoo_conf }}'
   register: zoo_config_update
 
-- name: transfer systemd service file transfer
+- name: Zookeeper systemd service file transfer.
   template:
     src: 'zookeeper.service.j2'
     dest: '/etc/systemd/system/zookeeper.service'

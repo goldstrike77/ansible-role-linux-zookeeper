@@ -1,8 +1,23 @@
 ---
 zoo_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn'
 
-zoo_service_privilege:
-  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl restart zookeeper.service'
-  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl stop zookeeper.service'
-  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl start zookeeper.service'
-  - '%{{ zoo_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl status zookeeper.service'
+zoo_support_jars:
+  - 'disruptor.jar'
+  - 'jmx_prometheus_javaagent.jar'
+  - 'libwrapper.so'
+  - 'log4j-api.jar'
+  - 'log4j-core.jar'
+  - 'log4j-jmx-gui.jar'
+  - 'log4j-jul.jar'
+  - 'logstash-gelf.jar'
+  - 'wrapper.jar'
+
+zoo_support_binary:
+  - 'wrapper'
+  - 'zookeeper.init'
+
+zoo_conf:
+  - 'log4j2.xml'
+  - 'prometheus.yml'
+  - 'wrapper.conf'
+  - 'zoo.cfg'
