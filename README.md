@@ -59,7 +59,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `environments`: Define the service environment.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: false Whether register a exporter service with public consul client.
+* `consul_public_register`: Whether register a exporter service with public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_clients`: List of public consul clients.
 * `consul_public_http_port`: The consul HTTP API port.
