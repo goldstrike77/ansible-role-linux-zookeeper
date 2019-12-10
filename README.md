@@ -32,9 +32,9 @@ This Ansible role installs apache Zookeeper on linux operating system, including
 ### Operating systems
 This role will work on the following operating systems:
 
-  * CentOS 6,7
+  * CentOS 7
 
-### Apache zookeeper versions
+### Zaookeeper versions
 
 The following list of supported the zookeeper releases:
 
@@ -114,7 +114,7 @@ See tests/inventory for an example.
     node01 ansible_host='192.168.1.10' zoo_version='3.5.6'
 
 ### Vars in role configuration
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Including an example of how to use your role for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
       roles:
