@@ -27,7 +27,7 @@ consul_public_clients: # List of public consul clients.
   - '127.0.0.1'
 
 # Syslog parameters #
-syslog: false # A boolean value,  Enable or Disable send console and access log to remote Syslog server.
+syslog: false # A boolean value, Enable or Disable send console and access log to remote Syslog server.
 syslog_port: '12201' # Syslog server port.
 syslog_protocol: 'udp' # Syslog server protocol.
 syslog_server: # List of syslog server list.
@@ -35,22 +35,22 @@ syslog_server: # List of syslog server list.
 
 # Listen port #
 zoo_port:
-  client: '2181' # Client Port.
   admin: '18080' # The port the embedded Jetty server listens on.
+  client: '2181' # Client Port.
+  jmx: '9405' # Prometheus jmx_exporter listens.
   wrapper: '33000-33999' # A socket to communicate with its Java component running inside a JVM.
   wrapper_jvm: '34000-34999' # A socket to communicate with its Java component running inside a JVM.
-  jmx: '9405' # Prometheus jmx_exporter listens.
 
 # System Variables #
 zoo_arg:
-  connections: '1000' # The maximum number of client connections.
-  user: 'zookeeper' # Zookeeper running user.
   admin_enableServer: true # Whether enable the Admin Server.
   admin_commandURL: '/commands' # The URL for listing and issuing commands relative to the root URL.
+  connections: '1000' # The maximum number of client connections.
   jvm_heapdumppath: '/tmp' # Heap dump folder.
   jvm_security_egd: '/dev/urandom' # Random number generation library.
   lc_ctype: 'zh_CN.UTF-8' # The language of messages.
   timezone: 'Asia/Shanghai' # Default timezone for a single instance of a running JVM.
+  user: 'zookeeper' # Zookeeper running user.
   ulimit_core: 'unlimited' # The number of core dump launched by systemd.
   ulimit_nofile: '10240' # The number of files launched by systemd.
   ulimit_nproc: '10240' # The number of processes launched by systemd.
