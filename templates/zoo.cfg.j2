@@ -29,3 +29,8 @@ maxClientCnxns={{ zoo_arg.connections }}
 admin.enableServer={{ zoo_arg.admin_enableServer | bool | to_json }}
 admin.serverPort={{ zoo_port.admin }}
 admin.commandURL={{ zoo_arg.admin_commandURL }}
+{% if zoo_servers | length > 1 %}
+{% for host in zoo_servers %}
+server.{{ loop.index }}={{ host }}:{{ zoo_port.leader }}:{{ zoo_port.election }}
+{% endfor %}
+{% endif %}

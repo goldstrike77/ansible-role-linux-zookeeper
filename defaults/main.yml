@@ -38,6 +38,8 @@ zoo_port:
   admin: '18080' # The port the embedded Jetty server listens on.
   client: '2181' # Client Port.
   jmx: '9405' # Prometheus jmx_exporter listens.
+  leader: '2888' # Leader communication.
+  election: '3888' # Leader election.
   wrapper: '33000-33999' # A socket to communicate with its Java component running inside a JVM.
   wrapper_jvm: '34000-34999' # A socket to communicate with its Java component running inside a JVM.
 

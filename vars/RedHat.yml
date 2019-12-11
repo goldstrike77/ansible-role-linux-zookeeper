@@ -1,5 +1,6 @@
 ---
 zoo_dependent_packages:
-  - 'java-1.8.0-openjdk-headless'
+  - 'java-1.8.0-openjdk'
+  - 'java-1.8.0-openjdk-devel'
   - 'libselinux-utils'
   - 'policycoreutils-python'

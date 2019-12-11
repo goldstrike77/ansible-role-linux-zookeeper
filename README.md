@@ -74,6 +74,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_port.admin`: The port the embedded Jetty server listens on.
 * `zoo_port.client`: Client Port.
 * `zoo_port.jmx`: Prometheus jmx_exporter listens.
+* `zoo_port.leader`: Leader communication.
+* `zoo_port.election`: Leader election.
 * `zoo_port.wrapper`: A socket to communicate with its Java component running inside a JVM.
 * `zoo_port.wrapper_jvm`: A socket to communicate with its Java component running inside a JVM.
 
@@ -134,6 +136,8 @@ You can also use the group_vars or the host_vars files for setting the variables
     zoo_port:
       admin: '18080'
       client: '2181'
+      leader: '2888'
+      election: '3888'
       jmx: '9405'
       wrapper: '33000-33999'
       wrapper_jvm: '34000-34999'

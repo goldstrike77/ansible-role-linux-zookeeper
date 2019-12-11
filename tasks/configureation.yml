@@ -30,3 +30,12 @@
     group: 'root'
     mode: '0644'
   register: zoo_systemd_update
+
+- name: Zookeeper server instance unique id file transfer.
+  template:
+    src: 'myid.j2'
+    dest: '{{ zoo_path }}/zookeeper/var/myid'
+    owner: '{{ zoo_arg.user }}'
+    group: '{{ zoo_arg.user }}'
+    mode: '0644'
+  when: zoo_servers | length > 1

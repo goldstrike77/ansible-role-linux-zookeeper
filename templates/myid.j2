@@ -1,0 +1,5 @@
+{% for host in zoo_servers %}
+{% if ansible_default_ipv4.address == host %}
+{{ loop.index }}
+{% endif %}
+{% endfor %}
