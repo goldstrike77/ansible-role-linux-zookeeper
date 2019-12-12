@@ -1,0 +1,20 @@
+Server {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+{% if zoo_user_client_arg is defined %}
+{% for client in zoo_user_client_arg %}
+  user_{{ client.user }}="{{ client.passwd }}"
+{% endfor %}
+{% endif %}
+  user_super="{{ zoo_user_super_passwd }}";
+};
+
+QuorumServer {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+  user_zookeeper="{{ lookup('password', '' + group_names[-1] + ':authentication length=14 chars=ascii_letters,digits') }}";
+};
+
+QuorumLearner {
+  org.apache.zookeeper.server.auth.DigestLoginModule required
+  username="zookeeper"
+  password="{{ lookup('password', '' + group_names[-1] + ':authentication length=14 chars=ascii_letters,digits') }}";
+};

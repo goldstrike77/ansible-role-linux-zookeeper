@@ -46,6 +46,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### General parameters
 * `zoo_version`: Specify the Zookeeper version.
+* `zoo_cluster`: Cluster name of servers that implements distribution performance.
 * `zoo_path`: Specify the Zookeeper working directory.
 * `zoo_java_home`: Environment variable to point to an installed JDK.
 
@@ -54,6 +55,11 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_jvm_xmn`: Size of the heap for the young generation in MB.
 * `zoo_jvm_xmx`: Size of the heap in MB.
 * `zoo_jvm_xss`: Size of thread stack in KB.
+
+##### ACL Variables
+* `zoo_enable_auth`: Whether enable quorum authentication using SASL.
+* `zoo_user_super_passwd`: # Administrator priviledges user password.
+* `zoo_user_client_arg`: # Client authentication information.
 
 ##### Service Mesh
 * `environments`: Define the service environment.
@@ -127,12 +133,18 @@ Including an example of how to use your role for instance, with variables passed
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     zoo_version: '3.5.6'
+    zoo_cluster: 'zk-cluster01'
     zoo_path: '/data'
     zoo_java_home: '/usr/lib/jvm/java'
     zoo_jvm_metaspace: '512'
     zoo_jvm_xmn: '384'
     zoo_jvm_xmx: '2048'
     zoo_jvm_xss: '256'
+    zoo_enable_auth: true
+    zoo_user_super_passwd: 'changeme'
+    zoo_user_client_arg:
+      - user: 'kafka'
+        passwd: 'changeme'
     zoo_port:
       admin: '18080'
       client: '2181'

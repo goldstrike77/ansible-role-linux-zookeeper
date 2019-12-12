@@ -1,4 +1,19 @@
 ---
+- name: Gather Zookeeper node variables for cluster
+  set_fact:
+    zoo_servers: "\
+      {% set _zoo_servers = [] %}\
+      {% for host in groups[group_names[-1]] %}\
+        {% if zoo_cluster is defined %}\
+          {% set _zoo_cluster = zoo_cluster | default('') %}\
+          {% if ( _zoo_cluster == zoo_cluster ) %}\
+            {% if _zoo_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+          {% endif %}\
+        {% endif %}\
+      {% endfor %}\
+      {{ _zoo_servers }}"
+  when: zoo_servers is not defined
+
 - name: Include tasks for specific OS
   include: '{{ ansible_os_family }}.yml'
 
@@ -14,7 +29,7 @@
 - name: Reload the Zookeeper service
   shell: echo ''
   notify: 'Ensure zookeeper service is enabled'
-  when: zoo_config_update is changed or zoo_systemd_update is changed
+  when: zoo_config_update is changed or zoo_systemd_update is changed or zoo_jaas_update is changed
 
 - name: Force the handler to run immediately
   meta: flush_handlers

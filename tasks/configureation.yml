@@ -39,3 +39,13 @@
     group: '{{ zoo_arg.user }}'
     mode: '0644'
   when: zoo_servers | length > 1
+
+- name: Zookeeper authentication config transfer.
+  template:
+    src: 'jaas.conf.j2'
+    dest: '{{ zoo_path }}/zookeeper/conf/jaas.conf'
+    owner: '{{ zoo_arg.user }}'
+    group: '{{ zoo_arg.user }}'
+    mode: '0644'
+  when: zoo_enable_auth | bool
+  register: zoo_jaas_update

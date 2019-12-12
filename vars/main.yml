@@ -1,13 +1,4 @@
 ---
-zoo_servers: "\
-  {% set _zoo_server = [] %}\
-  {% for host in groups[group_names[-1]] %}\
-    {% if ( zoo_is_install ) %}\
-      {% if _zoo_server.append(hostvars[host]['ansible_host']) %}{% endif %}\
-    {% endif %}\
-  {% endfor %}\
-  {{ _zoo_server }}"
-
 zoo_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn'
 
 zoo_support_jars:

@@ -34,3 +34,15 @@ admin.commandURL={{ zoo_arg.admin_commandURL }}
 server.{{ loop.index }}={{ host }}:{{ zoo_port.leader }}:{{ zoo_port.election }}
 {% endfor %}
 {% endif %}
+{% if zoo_enable_auth | bool %}
+quorum.auth.enableSasl=true
+quorum.auth.learnerRequireSasl=true
+quorum.auth.serverRequireSasl=true
+quorum.auth.learner.loginContext=QuorumLearner
+quorum.auth.server.loginContext=QuorumServer
+quorum.cnxn.threads.size=20
+requireClientAuthScheme=sasl
+{% for host in zoo_servers %}
+authProvider.{{ loop.index }}=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+{% endfor %}
+{% endif %}
