@@ -2,22 +2,14 @@
 zoo_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn'
 
 zoo_support_jars:
-  - 'disruptor.jar'
   - 'jmx_prometheus_javaagent.jar'
-  - 'libwrapper.so'
-  - 'log4j-api.jar'
-  - 'log4j-core.jar'
-  - 'log4j-jmx-gui.jar'
-  - 'log4j-jul.jar'
-  - 'logstash-gelf.jar'
-  - 'wrapper.jar'
-
-zoo_support_binary:
-  - 'wrapper'
-  - 'zookeeper.init'
 
 zoo_conf:
-  - 'log4j2.xml'
   - 'prometheus.yml'
-  - 'wrapper.conf'
   - 'zoo.cfg'
+
+zoo_support_binary:
+  - 'zkEnv.sh'
+
+zoo_exclusions:
+  - 'bin/zkEnv.sh'

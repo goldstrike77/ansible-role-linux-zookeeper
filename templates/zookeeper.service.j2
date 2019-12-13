@@ -1,11 +1,14 @@
 [Unit]
-Description=Zookeeper Application Server
+Description=ZooKeeper Service
+Requires=network.target
 After=network.target
 
 [Service]
 Type=forking
-ExecStart={{ zoo_path }}/zookeeper/bin/zookeeper.init start sysd
-ExecStop={{ zoo_path }}/zookeeper/bin/zookeeper.init stop sysd
+ExecStart={{ zoo_path }}/zookeeper/bin/zkServer.sh start {{ zoo_path }}/zookeeper/conf/zoo.cfg
+ExecStop={{ zoo_path }}/zookeeper/bin/zkServer.sh stop {{ zoo_path }}/zookeeper/conf/zoo.cfg
+ExecReload={{ zoo_path }}/zookeeper/bin/zkServer.sh restart {{ zoo_path }}/zookeeper/conf/zoo.cfg
+WorkingDirectory={{ zoo_path }}/zookeeper/var
 User={{ zoo_arg.user }}
 LimitNOFILE={{ zoo_arg.ulimit_nofile }}
 LimitNPROC={{ zoo_arg.ulimit_nproc }}
@@ -17,4 +20,4 @@ Restart=on-failure
 RestartSec=30s
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

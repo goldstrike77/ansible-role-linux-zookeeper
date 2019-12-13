@@ -51,10 +51,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_java_home`: Environment variable to point to an installed JDK.
 
 ##### JVM memory Variables
-* `zoo_jvm_metaspace`: Size of the metaspace in MB.
-* `zoo_jvm_xmn`: Size of the heap for the young generation in MB.
 * `zoo_jvm_xmx`: Size of the heap in MB.
-* `zoo_jvm_xss`: Size of thread stack in KB.
 
 ##### ACL Variables
 * `zoo_enable_auth`: Whether enable quorum authentication using SASL.
@@ -82,31 +79,14 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_port.jmx`: Prometheus jmx_exporter listens.
 * `zoo_port.leader`: Leader communication.
 * `zoo_port.election`: Leader election.
-* `zoo_port.wrapper`: A socket to communicate with its Java component running inside a JVM.
-* `zoo_port.wrapper_jvm`: A socket to communicate with its Java component running inside a JVM.
 
 ##### System Variables
 * `zoo_arg.admin_enableServer`: Whether enable the Admin Server.
 * `zoo_arg.admin_commandURL`: The URL for listing and issuing commands relative to the root URL.
 * `zoo_arg.connections`: The maximum number of client connections.
-* `zoo_arg.jvm_heapdumppath`: Heap dump folder.
-* `zoo_arg.jvm_security_egd`: Random number generation library.
-* `zoo_arg.lc_ctype`: The language of messages.
-* `zoo_arg.timezone`: Default timezone for a single instance of a running JVM.
 * `zoo_arg.user`: Zookeeper running user.
-* `zoo_arg.ulimit_core`: The number of core dump launched by systemd.
 * `zoo_arg.ulimit_nofile`: The number of files launched by systemd.
 * `zoo_arg.ulimit_nproc`: The number of processes launched by systemd.
-* `zoo_arg.wrapper_console_format`: Format to use for output to the console.
-* `zoo_arg.wrapper_console_loglevel`: Log level to use for console output.
-* `zoo_arg.wrapper_java_command_loglevel`: Log level to use for Java command.
-* `zoo_arg.wrapper_logfile`: Sets the path to the Wrapper log file.
-* `zoo_arg.wrapper_logfile_format`: Format to use for logging to the log file.
-* `zoo_arg.wrapper_logfile_loglevel`: Filters messages sent to the log file according to their log levels.
-* `zoo_arg.wrapper_logfile_maxfiles`: Controls the maximum number of rolled files.
-* `zoo_arg.wrapper_logfile_maxsize`: Controls the maximum size of rolled files.
-* `zoo_arg.wrapper_syslog_loglevel`: Log level to use for logging to the Event Log on syslog on UNIX systems.
-* `zoo_arg.wrapper_ulimit_loglevel`: Controls at which log level resource limits will be logged.
 
 ### Other parameters
 There are some variables in vars/main.yml:
@@ -136,10 +116,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     zoo_cluster: 'zk-cluster01'
     zoo_path: '/data'
     zoo_java_home: '/usr/lib/jvm/java'
-    zoo_jvm_metaspace: '512'
-    zoo_jvm_xmn: '384'
     zoo_jvm_xmx: '2048'
-    zoo_jvm_xss: '256'
     zoo_enable_auth: true
     zoo_user_super_passwd: 'changeme'
     zoo_user_client_arg:
@@ -151,30 +128,13 @@ You can also use the group_vars or the host_vars files for setting the variables
       leader: '2888'
       election: '3888'
       jmx: '9405'
-      wrapper: '33000-33999'
-      wrapper_jvm: '34000-34999'
     zoo_arg:
       admin_enableServer: true
       admin_commandURL: '/commands'
       connections: '1000'
-      jvm_heapdumppath: '/tmp'
-      jvm_security_egd: '/dev/urandom'
-      lc_ctype: 'zh_CN.UTF-8'
-      timezone: 'Asia/Shanghai'
       user: 'zookeeper'
-      ulimit_core: 'unlimited'
       ulimit_nofile: '10240'
       ulimit_nproc: '10240'
-      wrapper_console_format: 'PM'
-      wrapper_console_loglevel: 'INFO'
-      wrapper_java_command_loglevel: 'NONE'
-      wrapper_logfile: 'zookeeper.out'
-      wrapper_logfile_format: 'ZM'
-      wrapper_logfile_loglevel: 'INFO'
-      wrapper_logfile_maxfiles: '25'
-      wrapper_logfile_maxsize: '50m'
-      wrapper_syslog_loglevel: 'NONE'
-      wrapper_ulimit_loglevel: 'STATUS'
     syslog: false
     syslog_port: '12201'
     syslog_protocol: 'udp'

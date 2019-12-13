@@ -16,6 +16,7 @@
     dest: '{{ zoo_path }}/zookeeper'
     owner: '{{ zoo_arg.user }}'
     group: '{{ zoo_arg.user }}'
+    exclude: '{{ zoo_exclusions }}'
     extra_opts: [--strip-components=1]
     remote_src: 'yes'
     validate_certs: 'no'
@@ -25,12 +26,13 @@
   delay: 5
 
 - name: Install Zookeeper support binary package.
-  copy:
-    src: '{{ item }}'
-    dest: '{{ zoo_path }}/zookeeper/bin/'
+  template:
+    src: '{{ item }}.j2'
+    dest: '{{ zoo_path }}/zookeeper/bin/{{ item }}'
     owner: '{{ zoo_arg.user }}'
     group: '{{ zoo_arg.user }}'
-    mode: '0750'
+    mode: '0755'
+    backup: 'yes'
   loop: '{{ zoo_support_binary }}'
 
 - name: Install Zookeeper support JAR package.
