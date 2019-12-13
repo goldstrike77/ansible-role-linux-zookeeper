@@ -67,12 +67,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `consul_public_clients`: List of public consul clients.
 * `consul_public_http_port`: The consul HTTP API port.
 
-##### Syslog parameters
-* `syslog`: A boolean value, Enable or Disable send console and access log to remote Syslog server.
-* `syslog_port`: Syslog server port.
-* `syslog_protocol`: Syslog server protocol.
-* `syslog_server`: List of syslog server list.
-
 ##### Listen port
 * `zoo_port.admin`: The port the embedded Jetty server listens on.
 * `zoo_port.client`: Client Port.
@@ -135,11 +129,6 @@ You can also use the group_vars or the host_vars files for setting the variables
       user: 'zookeeper'
       ulimit_nofile: '10240'
       ulimit_nproc: '10240'
-    syslog: false
-    syslog_port: '12201'
-    syslog_protocol: 'udp'
-    syslog_server:
-      - '127.0.0.1'
     environments: 'Development'
     tags:
       subscription: 'default'

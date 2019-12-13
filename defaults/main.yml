@@ -16,13 +16,6 @@ zoo_user_super_passwd: 'changeme' # Administrator priviledges user password.
 #  - user: 'kafka'
 #    passwd: 'changeme'
 
-# Syslog parameters #
-syslog: false # A boolean value, Enable or Disable send console and access log to remote Syslog server.
-syslog_port: '12201' # Syslog server port.
-syslog_protocol: 'udp' # Syslog server protocol.
-syslog_server: # List of syslog server list.
-  - '127.0.0.1'
-
 # Listen port #
 zoo_port:
   admin: '18080' # The port the embedded Jetty server listens on.
