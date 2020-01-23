@@ -58,15 +58,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_user_super_passwd`: # Administrator priviledges user password.
 * `zoo_user_client_arg`: # Client authentication information.
 
-##### Service Mesh
-* `environments`: Define the service environment.
-* `tags`: Define the service custom label.
-* `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: Whether register a exporter service with public consul client.
-* `consul_public_exporter_token`: Public Consul client ACL token.
-* `consul_public_clients`: List of public consul clients.
-* `consul_public_http_port`: The consul HTTP API port.
-
 ##### Listen port
 * `zoo_port.admin`: The port the embedded Jetty server listens on.
 * `zoo_port.client`: Client Port.
@@ -81,6 +72,16 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `zoo_arg.user`: Zookeeper running user.
 * `zoo_arg.ulimit_nofile`: The number of files launched by systemd.
 * `zoo_arg.ulimit_nproc`: The number of processes launched by systemd.
+
+##### Service Mesh
+* `environments`: Define the service environment.
+* `tags`: Define the service custom label.
+* `exporter_is_install`: Whether to install prometheus exporter.
+* `consul_public_register`: false Whether register a exporter service with public consul client.
+* `consul_public_exporter_token`: Public Consul client ACL token.
+* `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
+* `consul_public_clients`: List of public consul clients.
+* `consul_public_http_port`: The consul HTTP API port.
 
 ### Other parameters
 There are some variables in vars/main.yml:
@@ -139,6 +140,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     exporter_is_install: false
     consul_public_register: false
     consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+    consul_public_http_prot: 'https'
     consul_public_http_port: '8500'
     consul_public_clients:
       - '127.0.0.1'
