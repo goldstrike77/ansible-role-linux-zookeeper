@@ -26,11 +26,11 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs apache Zookeeper on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
+ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement higher-level services for synchronization, configuration maintenance, and groups and naming. It is designed to be easy to program to and uses a data model styled after the familiar directory tree structure of file systems.
 
 ## Requirements
 ### Operating systems
-This role will work on the following operating systems:
+This Ansible role installs apache Zookeeper on linux operating system, including establishing a filesystem structure and server configuration with some common operational features, Will works on the following operating systems:
 
   * CentOS 7
 
@@ -38,7 +38,7 @@ This role will work on the following operating systems:
 
 The following list of supported the zookeeper releases:
 
-* Apache Zookeeper 3.5.6
+* Apache Zookeeper 3.5.8
 
 ## Role variables
 ### Main parameters #
@@ -55,8 +55,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### ACL Variables
 * `zoo_enable_auth`: Whether enable quorum authentication using SASL.
-* `zoo_user_super_passwd`: # Administrator priviledges user password.
-* `zoo_user_client_arg`: # Client authentication information.
+* `zoo_user_super_passwd`: Administrator priviledges user password.
+* `zoo_user_client_arg`: Client authentication information.
 
 ##### Listen port
 * `zoo_port.admin`: The port the embedded Jetty server listens on.
@@ -75,9 +75,11 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Service Mesh
 * `environments`: Define the service environment.
+* `datacenter`: Define the DataCenter.
+* `domain`: Define the Domain.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: false Whether register a exporter service with public consul client.
+* `consul_public_register`: Whether register a exporter service with public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
 * `consul_public_clients`: List of public consul clients.
@@ -94,56 +96,62 @@ There are no dependencies on other roles.
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' zoo_version='3.5.6'
+    node01 ansible_host='192.168.1.10' zoo_version='3.5.8'
 
 ### Vars in role configuration
 Including an example of how to use your role for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: all
-      roles:
-         - role: ansible-role-linux-zookeeper
-           zoo_version: '3.5.6'
+```yaml
+- hosts: all
+  roles:
+     - role: ansible-role-linux-zookeeper
+       zoo_version: '3.5.8'
+```
 
 ### Combination of group vars and playbook
-You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
+You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
-    zoo_version: '3.5.6'
-    zoo_cluster: 'zk-cluster01'
-    zoo_path: '/data'
-    zoo_java_home: '/usr/lib/jvm/java'
-    zoo_jvm_xmx: '2048'
-    zoo_enable_auth: true
-    zoo_user_super_passwd: 'changeme'
-    zoo_user_client_arg:
-      - user: 'kafka'
-        passwd: 'changeme'
-    zoo_port:
-      admin: '18080'
-      client: '2181'
-      leader: '2888'
-      election: '3888'
-      jmx: '9405'
-    zoo_arg:
-      admin_enableServer: true
-      admin_commandURL: '/commands'
-      connections: '1000'
-      user: 'zookeeper'
-      ulimit_nofile: '10240'
-      ulimit_nproc: '10240'
-    environments: 'Development'
-    tags:
-      subscription: 'default'
-      owner: 'nobody'
-      department: 'Infrastructure'
-      organization: 'The Company'
-      region: 'IDC01'
-    exporter_is_install: false
-    consul_public_register: false
-    consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_http_prot: 'https'
-    consul_public_http_port: '8500'
-    consul_public_clients:
-      - '127.0.0.1'
+```yaml
+zoo_version: '3.5.8'
+zoo_cluster: 'zk-cluster01'
+zoo_path: '/data'
+zoo_java_home: '/usr/lib/jvm/java'
+zoo_jvm_xmx: '2048'
+zoo_enable_auth: true
+zoo_user_super_passwd: 'changeme'
+zoo_user_client_arg:
+  - user: 'kafka'
+    passwd: 'changeme'
+zoo_port:
+  admin: '18080'
+  client: '2181'
+  leader: '2888'
+  election: '3888'
+  jmx: '9405'
+zoo_arg:
+  admin_enableServer: true
+  admin_commandURL: '/commands'
+  connections: '1000'
+  user: 'zookeeper'
+  ulimit_nofile: '10240'
+  ulimit_nproc: '10240'
+environments: 'Development'
+datacenter: 'dc01'
+domain: 'local'
+tags:
+  subscription: 'default'
+  owner: 'nobody'
+  department: 'Infrastructure'
+  organization: 'The Company'
+  region: 'China'
+exporter_is_install: false
+consul_public_register: false
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+consul_public_http_prot: 'https'
+consul_public_http_port: '8500'
+consul_public_clients:
+  - '127.0.0.1'
+```
 
 ## License
 
