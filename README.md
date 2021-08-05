@@ -23,7 +23,7 @@ __Table of Contents__
   * [Combination of group vars and playbook](#combination-of-group-vars-and-playbook)
 - [License](#license)
 - [Author Information](#author-information)
-- [Contributors](#Contributors)
+- [Donations](#Donations)
 
 ## Overview
 ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement higher-level services for synchronization, configuration maintenance, and groups and naming. It is designed to be easy to program to and uses a data model styled after the familiar directory tree structure of file systems.
@@ -135,9 +135,10 @@ zoo_arg:
   user: 'zookeeper'
   ulimit_nofile: '10240'
   ulimit_nproc: '10240'
-environments: 'Development'
+environments: 'prd'
 datacenter: 'dc01'
 domain: 'local'
+customer: 'demo'
 tags:
   subscription: 'default'
   owner: 'nobody'
@@ -160,5 +161,7 @@ consul_public_clients:
 ## Author Information
 Please send your suggestions to make this role better.
 
-## Contributors
-Special thanks to the [Connext Information Technology](http://www.connext.com.cn) for their contributions to this role.
+## Donations
+Please donate to the following monero address.
+
+    46CHVMbb6wQV2PJYEbahb353SYGqXhcdFQVEWdCnHb6JaR5125h3kNQ6bcqLye5G7UF7qz6xL9qHLDSAY3baagfmLZABz75
